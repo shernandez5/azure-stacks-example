@@ -1,16 +1,16 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-identity_token "azurerm" {
-  audience = ["api://AzureADTokenExchange"]
+store "varset" "tokens" {
+  id       = "varset-ghrHJqshEhbLtQub"
+  category = "env"
 }
 
 deployment "production" {
   inputs = {
-    identity_token = identity_token.azurerm.jwt
-
-    client_id       = "<Set to your Azure Client ID>"
-    subscription_id = "<Set to your Azure Subscription ID>"
-    tenant_id       = "<Set to your Azure Tenant ID>"
+    client_id       = store.varset.tokens.client_id
+    client_secret   = store.varset.tokens.client_secret
+    subscription_id = store.varset.tokens.subscription_id
+    tenant_id       = store.varset.tokens.tenant_id
   }
 }
