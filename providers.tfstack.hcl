@@ -28,6 +28,7 @@ provider "azurerm" "this" {
     features {}
     // use_cli should be set to false to yield more accurate error messages on auth failure.
     use_cli = false
+    skip_provider_registration = true
 
     client_id       = var.client_id
     client_secret   = var.client_secret
